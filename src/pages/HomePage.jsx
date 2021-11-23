@@ -1,16 +1,8 @@
 import { getTrending } from "../api/api";
 import { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
+import MovieCard from "../Components/MovieCard/MovieCard";
 import Grid from "@mui/material/Grid";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export function HomePage() {
   const [popularList, setPopularList] = useState([]);
@@ -29,14 +21,19 @@ export function HomePage() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Container maxWidth="lg">
       <Grid container spacing={2}>
         {popularList.map((item) => (
-          <Grid item xs={3}>
-            <Item>{item.name || item.title}</Item>
+          <Grid item xs={3} key={item.id}>
+            <MovieCard
+              image={`https://www.themoviedb.org/t/p/w440_and_h660_face/${item.poster_path}`}
+              title={item.name || item.title}
+              voteAverage={item.vote_average.toFixed(1)}
+              id={item.id}
+            />
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </Container>
   );
 }
