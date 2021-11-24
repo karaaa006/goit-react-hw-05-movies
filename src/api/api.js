@@ -19,7 +19,7 @@ async function getMovieInfoById(id) {
 }
 
 async function getTrending() {
-  const { data } = await api.get(`trending/all/day`);
+  const { data } = await api.get(`trending/movie/day`);
 
   return data;
 }
