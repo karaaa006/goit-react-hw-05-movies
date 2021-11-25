@@ -1,17 +1,27 @@
-import Card from "@mui/material/Card";
-import { CardActionArea } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
+import {
+  CardActionArea,
+  Chip,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function MovieCard({ image, title, voteAverage, id }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link to={`movies/${id}`}>
+      <Link to={`/movies/${id}`}>
         <CardActionArea>
-          <CardMedia component="img" image={image} alt={title} />
+          <CardMedia
+            component="img"
+            image={
+              image
+                ? `https://www.themoviedb.org/t/p/w440_and_h660_face/${image}`
+                : `https://via.placeholder.com/440x660?text=Image+not+found!`
+            }
+            alt={title}
+          />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
               {title}

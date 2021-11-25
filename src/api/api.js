@@ -19,9 +19,49 @@ async function getMovieInfoById(id) {
 }
 
 async function getTrending() {
-  const { data } = await api.get(`trending/movie/day`);
+  try {
+    const { data } = await api.get(`trending/movie/day`);
 
-  return data;
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-export { getMovieInfoById, getTrending };
+async function getCredits(id) {
+  try {
+    const { data } = await api.get(`movie/${id}/credits`);
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function getReviews(id) {
+  try {
+    const { data } = await api.get(`movie/${id}/reviews`);
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function getMoviesByQuery(query) {
+  try {
+    const { data } = await api.get(`search/movie?query=${query}`);
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export {
+  getMovieInfoById,
+  getTrending,
+  getCredits,
+  getReviews,
+  getMoviesByQuery,
+};

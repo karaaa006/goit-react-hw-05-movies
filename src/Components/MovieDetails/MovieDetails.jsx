@@ -1,19 +1,26 @@
-import { Chip, Grid, Paper, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 
+import { Chip, Grid, Stack, Typography, Paper } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
 export function MovieDetails({
-  movieId = "",
   title = "",
   description = "",
   genres = [],
   score = "",
-  year = "",
-  image = "",
+  releaseDate = "",
+  image,
 }) {
   return (
-    <Paper elevation={1} sx={{ p: 2 }}>
-      <Grid container spacing={2} style={{ justifyContent: "center" }}>
+    <>
+      <Grid container spacing={2} sx={{ justifyContent: "center" }}>
         <Grid item s={12} md={3}>
           <img
             src={
@@ -26,10 +33,10 @@ export function MovieDetails({
         </Grid>
         <Grid item s={12} md={9}>
           <Typography gutterBottom variant="h5" component="h1">
-            {title}
+            {title} ({releaseDate.slice(0, 4)})
           </Typography>
-          <Typography gutterBottom variant="h6" component="h2">
-            User Score: {`${score}%`}
+          <Typography gutterBottom variant="body1" component="p">
+            User Score: {`${score * 10}%`}
           </Typography>
           <Typography gutterBottom variant="h6" component="h2">
             Overview
@@ -44,12 +51,16 @@ export function MovieDetails({
           </Stack>
         </Grid>
         <Grid item xs={12}>
-          <Box sx={{ mt: 1 }}>
-            <Link to="cast">Cast</Link>
-            <Link to="reviews">Reviews</Link>
-          </Box>
+          <Stack direction="row" spacing={1} justifyContent="center">
+            <Link to="cast">
+              <Item>Cast</Item>
+            </Link>
+            <Link to="reviews">
+              <Item>Reviews</Item>
+            </Link>
+          </Stack>
         </Grid>
       </Grid>
-    </Paper>
+    </>
   );
 }
