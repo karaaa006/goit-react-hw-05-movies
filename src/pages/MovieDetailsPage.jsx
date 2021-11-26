@@ -1,12 +1,14 @@
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import { useNavigate, useParams, Outlet } from "react-router-dom";
 import { getMovieInfoById } from "../api/api";
 import { MovieDetails } from "../Components/MovieDetails/MovieDetails";
 
 export function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchInfo() {
@@ -20,8 +22,17 @@ export function MovieDetailsPage() {
     }
     fetchInfo();
   }, [movieId]);
+
   return (
     <>
+      <Button
+        variant="outlined"
+        size="small"
+        sx={{ mb: 2 }}
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </Button>
       <Paper elevation={1} sx={{ p: 2 }}>
         <MovieDetails
           movieId={movie.id}

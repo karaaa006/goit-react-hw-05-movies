@@ -1,9 +1,13 @@
 import { getMoviesByQuery } from "../api/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MovieCard from "../Components/MovieCard/MovieCard";
 import Grid from "@mui/material/Grid";
 import { Button, TextField } from "@mui/material";
-
+/**
+ * 1. query в поисковую строку
+ * 2. Разделение кода
+ * 3. Проверить/оптимизировать код и прогу
+ */
 export function MoviesPage() {
   const [moviesList, setMoviesList] = useState([]);
   const [query, setQuery] = useState("");
