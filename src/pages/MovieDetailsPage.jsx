@@ -4,7 +4,7 @@ import { useNavigate, useParams, Outlet } from "react-router-dom";
 import { getMovieInfoById } from "../api/api";
 import { MovieDetails } from "../Components/MovieDetails/MovieDetails";
 
-export function MovieDetailsPage() {
+export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
   const { movieId } = useParams();
 

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   CardActionArea,
   Chip,
@@ -10,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export default function MovieCard({ image, title, voteAverage, id }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <Link to={`/movies/${id}`}>
         <CardActionArea>
           <CardMedia
@@ -33,3 +34,10 @@ export default function MovieCard({ image, title, voteAverage, id }) {
     </Card>
   );
 }
+
+MovieCard.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  voteAverage: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};

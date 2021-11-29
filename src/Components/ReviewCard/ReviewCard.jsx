@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Card, CardContent, Typography } from "@mui/material";
 
 export function ReviewCard({ author, content }) {
@@ -14,3 +15,8 @@ export function ReviewCard({ author, content }) {
     </Card>
   );
 }
+
+ReviewCard.propTypes = {
+  author: PropTypes.string,
+  content: PropTypes.string,
+};

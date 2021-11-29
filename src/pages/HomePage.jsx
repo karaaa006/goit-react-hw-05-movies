@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MovieCard from "../Components/MovieCard/MovieCard";
 import { Grid, Typography } from "@mui/material";
 
-export function HomePage() {
+export default function HomePage() {
   const [popularList, setPopularList] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function HomePage() {
       </Typography>
       <Grid container spacing={2}>
         {popularList.map((item) => (
-          <Grid item xs={3} key={item.id}>
+          <Grid item xs={6} md={3} key={item.id}>
             <MovieCard
               image={`https://www.themoviedb.org/t/p/w440_and_h660_face/${item.poster_path}`}
               title={item.title}

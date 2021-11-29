@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { getReviews } from "../api/api";
 import { ReviewCard } from "../Components/ReviewCard/ReviewCard";
 
-export function Reviews() {
+export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
 
@@ -16,6 +16,7 @@ export function Reviews() {
         setReviews(data.results);
       } catch (e) {
         console.log(e);
+      } finally {
       }
     }
     fetchInfo();

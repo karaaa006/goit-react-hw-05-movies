@@ -1,46 +1,42 @@
 import { getMoviesByQuery } from "../api/api";
-import { useState } from "react";
-import MovieCard from "../Components/MovieCard/MovieCard";
-import Grid from "@mui/material/Grid";
-import { Button, TextField } from "@mui/material";
-/**
- * 1. query в поисковую строку
- * 2. Разделение кода
- * 3. Проверить/оптимизировать код и прогу
- */
-export function MoviesPage() {
-  const [moviesList, setMoviesList] = useState([]);
-  const [query, setQuery] = useState("");
 
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
+import { useState, useEffect } from "react";
+import MovieCard from "../Components/MovieCard/MovieCard";
+import { Grid } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
+
+import SearchForm from "../Components/SearchForm/SearchForm";
+
+export default function MoviesPage() {
+  const [moviesList, setMoviesList] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    async function fetchInfo() {
+      try {
+        const { results } = await getMoviesByQuery(searchParams.get("query"));
+
+        setMoviesList(results);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (searchParams.has("query")) fetchInfo();
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { results } = await getMoviesByQuery(query);
-
-      setMoviesList(results);
-    } catch (e) {
-      console.log(e);
-    }
+    const { value } = e.target.query;
+    if (value) setSearchParams({ query: value });
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="search-form">
-        <TextField
-          name="query"
-          label="Search movies"
-          variant="outlined"
-          onChange={handleChange}
-          value={query}
-        />
-        <Button variant="contained" type="submit">
-          Search
-        </Button>
-      </form>
+      <SearchForm
+        onSubmit={handleSubmit}
+        defaultValue={searchParams.get("query")}
+      />
       <Grid container spacing={2}>
         {moviesList.map((item) => (
           <Grid item xs={3} key={item.id}>

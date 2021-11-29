@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { Chip, Grid, Stack, Typography, Paper } from "@mui/material";
@@ -14,8 +15,8 @@ export function MovieDetails({
   title = "",
   description = "",
   genres = [],
-  score = "",
-  releaseDate = "",
+  score,
+  releaseDate,
   image,
 }) {
   return (
@@ -33,10 +34,10 @@ export function MovieDetails({
         </Grid>
         <Grid item s={12} md={9}>
           <Typography gutterBottom variant="h5" component="h1">
-            {title} ({releaseDate.slice(0, 4)})
+            {title} {releaseDate && `(${releaseDate.slice(0, 4)})`}
           </Typography>
           <Typography gutterBottom variant="body1" component="p">
-            User Score: {`${score * 10}%`}
+            {`User Score: ${score * 10}%`}
           </Typography>
           <Typography gutterBottom variant="h6" component="h2">
             Overview
@@ -64,3 +65,12 @@ export function MovieDetails({
     </>
   );
 }
+
+MovieDetails.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  score: PropTypes.number,
+  releaseDate: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.object),
+};

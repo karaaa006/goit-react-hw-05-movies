@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export function ActorCard({ image, name, character }) {
@@ -24,3 +25,9 @@ export function ActorCard({ image, name, character }) {
     </Card>
   );
 }
+
+ActorCard.propTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string,
+  character: PropTypes.string,
+};

@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { getCredits } from "../api/api";
 import { ActorCard } from "../Components/ActorCard/ActorCard";
 
-export function Cast() {
+export default function Cast() {
   const [actors, setActors] = useState([]);
   const { movieId } = useParams();
 

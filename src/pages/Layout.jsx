@@ -2,12 +2,17 @@ import { Outlet, NavLink } from "react-router-dom";
 
 import { Box, Stack, Container } from "@mui/material";
 
-export function Layout() {
+export default function Layout() {
   return (
     <>
       <header>
         <Box
-          sx={{ backgroundColor: "primary.dark", p: 2, color: "white", mb: 2 }}
+          sx={{
+            backgroundColor: "primary.dark",
+            p: 2,
+            color: "#ffffff",
+            mb: 2,
+          }}
         >
           <Container>
             <Stack direction="row" spacing={2}>
